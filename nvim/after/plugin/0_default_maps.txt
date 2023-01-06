@@ -1,0 +1,35 @@
+:h default-mappings
+
+------------------------------------------------------------
+Default Mappings
+							*default-mappings*
+Nvim creates the following default mappings at |startup|. You can disable any
+of these in your config by simply removing the mapping, e.g. ":unmap Y".
+
+	nnoremap Y y$
+	nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
+
+	inoremap <C-U> <C-G>u<C-U>
+	inoremap <C-W> <C-G>u<C-W>
+
+	xnoremap * y/\V<C-R>"<CR>
+	xnoremap # y?\V<C-R>"<CR>
+
+	nnoremap & :&&<CR>
+
+------------------------------------------------------------
+nnoremap Y y$
+nnoremap <C-L> <Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>
+
+:verbose nmap Y
+:verbose nmap <C-L>
+
+------------------------------
+xnoremap * y/\V<C-R>"<CR>
+xnoremap # y?\V<C-R>"<CR>
+
+:verbose xmap *
+:verbose xmap #
+
+------------------------------------------------------------
+
