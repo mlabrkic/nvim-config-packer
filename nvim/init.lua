@@ -96,7 +96,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 -- See `:help vim.o`
 
 -- Set highlight on search
-vim.o.hlsearch = false
+-- vim.o.hlsearch = false  -- mlabrkic
 
 -- Make line numbers default
 vim.wo.number = true
@@ -153,12 +153,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Set lualine as statusline
 -- See `:help lualine.txt`
+local function column()  -- mlabrkic
+  return [[C:%-c]]
+end
+
 require('lualine').setup {
   options = {
     icons_enabled = false,
     theme = 'onedark',
     component_separators = '|',
     section_separators = '',
+  },
+  sections = {  -- mlabrkic
+    lualine_c = {column, {'filename', path = 3, shorting_target = 40, }},  -- column, filename
   },
 }
 
@@ -209,7 +216,7 @@ vim.keymap.set('n', '<leader>/', function()
     winblend = 10,
     previewer = false,
   })
-end, { desc = '[/] Fuzzily search in current buffer]' })
+end, { desc = '[/] Fuzzily search in current buffer' })  -- mlabrkic: fix typo: ... in current buffer]
 
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
@@ -336,7 +343,7 @@ end
 --
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
-local servers = {
+local servers = {  -- mlabrkic
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
@@ -359,7 +366,13 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Setup mason so it can manage external tooling
-require('mason').setup()
+require('mason').setup({
+  -- ui = {border = 'rounded'},
+
+	-- The directory in which to install packages.
+	-- install_root_dir = path.concat { vim.fn.stdpath "data", "mason" },
+	install_root_dir = "C:/UTILS/PORT/Neovim_LSP",  -- mlabrkic
+})
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
@@ -394,7 +407,7 @@ cmp.setup {
   mapping = cmp.mapping.preset.insert {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-Space>'] = cmp.mapping.complete( {} ),  -- mlabrkic: because warning (1 argument):  {}
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
