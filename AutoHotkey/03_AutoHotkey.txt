@@ -1,0 +1,123 @@
+https://www.autohotkey.com
+
+https://www.autohotkey.com/docs/AutoHotkey.htm
+https://www.autohotkey.com/docs/Tutorial.htm#s22
+
+https://www.autohotkey.com/docs/misc/WinTitle.htm
+
+---------------------------
+AutoHotkey Script Showcase
+https://www.autohotkey.com/docs/scripts/index.htm
+
+---------------------------
+https://www.rosettacode.org/wiki/Category:AutoHotkey
+
+
+---------------------------
+https://autohotkey.com/board/topic/5119-launching-multiple-ahk-scripts/
+
+;##### Master.ahk
+
+Run, MyScript1.ahk
+Run, %A_MyDocuments%\MyScript2.ahk
+Run, C:\MyScript3.ahk
+ExitApp
+
+
+---------------------------
+---------------------------
+https://www.maketecheasier.com/favorite-autohotkey-scripts/
+12 Favorite AutoHotKey Scripts You Can Use to Make Life Easier
+By Vamsi Krishna / Jul 27, 2019 / Software Hacks, Windows
+
+---------------------------
+http://www.thenickmay.com/books/practical-autohotkey/examples/
+
+---------------------------
+https://dailysysadmin.com/KB/Article/2860/autohotkey-usage-and-examples/
+
+If you want to call your scripts from PowerShell you can use:
+& "C:\Program Files\AutoHotkey\AutoHotkey.exe" "C:\Temp\Start.ahk"
+
+If you want to call your scripts from vbscript you can use:
+Set oWS = CreateObject("WScript.Shell")
+sPath = chr(34) & "C:\System\AHK\C:\Temp\Start.ahk" & Chr(34)
+errResult = oWS.Run(sPath,,False)
+
+A basic example of a script could be:
+; make Win+n as a hotkey for launching Notepad
+#n::Run Notepad
+
+he below script would enter the signature text when you press F6:
+; pressing F6 to insert your signature
+F8::
+Send Best,{Enter}{Enter} Bob Smith
+Return
+
+---------------------------
+https://sites.google.com/site/learnautohotkey/home/eamples
+
+Finally, keystrokes can also be sent in response to abbreviations you type, which are known as hotstrings.
+For example, whenever you type Btw followed by a space or comma, the following line will replace it with "By the way":
+::btw::by the way
+
+Getting input from the user with MsgBox, InputBox, etc.
+
+Clipboard: The variable named Clipboard is special because it contains the current text on the Windows clipboard.
+Even so, it can be used as though it were a normal variable.
+For example, the following line would display the current contents of the clipboard:
+MsgBox %clipboard%
+
+To alter the clipboard, consider the following example, which replaces the current contents of the clipboard with new text:
+clipboard = A line of text.`r`nA second line of text.`r`n
+
+In the above, `r and `n (accent followed by the letter "r" or "n") are used to indicate two special characters:
+carriage return and linefeed.
+These two characters start a new line of text as though the user had pressed Enter.
+
+To append text to the clipboard (or any other variable), follow this example:
+clipboard = %clipboard% And here is the text to append.
+
+See the clipboard and variables sections for more details.
+
+---------------------------
+https://www.howtogeek.com/409581/how-to-write-an-autohotkey-script/
+https://www.howtogeek.com/290501/how-to-create-custom-keyboard-shortcuts-with-autohotkey/
+
+---------------------------
+https://autohotkey.com/board/topic/1359-vim/
+https://autohotkey.com/board/topic/78526-edit-everywhere-with-vim/
+---------------------------
+
+https://github.com/rcmdnk/vim_ahk
+vim_ahk
+Setting file/exe file of AutoHotkey for Vim emulation.
+vim.ahk is the setting file for AutoHotkey(Autohotkey_L).
+vim.exe is a standalone application made from vim.ahk (available in the releases page).
+
+This is vim emulation for Windows.
+If you are interesting in same settings for Mac, try Vim emulation for Karabiner - Software for macOS: Karabiner-Elements complex_modifications rules by rcmdnk.
+
+Applications
+The default setting enables vim-mode for the following applications:
+Notepad (メモ帳)
+Wordpad
+TeraPad
+Windows Explorer
+Thunderbird (only sending window)
+Microsoft PowerPoint
+Microsoft Word
+Evernote
+Visual Studio Code
+OneNote
+TexWork
+TexStudio
+
+Examples of applications:
+Chrome: ahk_exe chrome.exe
+Firefox: ahk_exe firefox.exe
+Excel: ahk_exe EXCEL.EXE
+LibreOffice: ahk_exe soffice.bin (for all LibreOffice applications)
+
+---------------------------
+
