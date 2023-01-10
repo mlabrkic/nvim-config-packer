@@ -111,6 +111,15 @@ keymap("n", "<C-N>", "<Tab>", "NEWER cursor position in jump list - replace CTRL
 -- Now remap <tab> to something else
 keymap('n', '<Tab>', '%', 'Jump to matching pairs easily in normal mode')
 
+--[[
+==>
+CTRL-O
+Go to [count] Older cursor position in jump list (not a motion command).
+
+CTRL-N
+Go to [count] newer cursor position in jump list (not a motion command).
+
+]]
 ------------------------------------------------------------
 -- Insert --
 
@@ -140,6 +149,9 @@ keymap('i', '<A-t>', '<Esc>viWUlveu', "to Title case")
 keymap('x', '<s-tab>', '<gv', 'Continuous visual shifting (does not exit Visual mode)')
 keymap('x', '<tab>', '>gv', 'Continuous visual shifting (does not exit Visual mode)')
 
+------------------------------
+-- TODO:
+
 -- Reselect the text that has just been pasted, see also https://stackoverflow.com/a/4317090/6064933
 -- keymapExpr("n", "<leader>v", "printf('`[%s`]', getregtype()[0])", "reselect last pasted area")
 
@@ -147,9 +159,7 @@ keymap('x', '<tab>', '>gv', 'Continuous visual shifting (does not exit Visual mo
 -- https://github.com/kristijanhusak/neovim-config
 keymapExpr('n', 'gp', "'`[' . strpart(getregtype(), 0, 1) . '`]'", 'Select last pasted text')
 
--- Always use very magic mode for searching
-keymap("n", "/", [[/\v]])
-
+------------------------------
 -- Change current working directory locally and print cwd after that,
 -- see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file
 keymap("n", "<leader>cd", "<cmd>lcd %:p:h<cr><cmd>pwd<cr>", "Switch to the directory of the open buffer, and print cwd after that.")
@@ -181,37 +191,49 @@ keymap("c", "<C-A>", "<HOME>")
 -- Toggle cursor column (--> commands.lua)
 -- keymap.set("n", "<leader>cl", "<cmd>call utils#ToggleCursorCol()<cr>", { desc = "toggle cursor column" })
 
--- Edit and reload nvim config file quickly
+-- Edit nvim config file quickly
 keymap("n", "<leader>ev", "<cmd>tabnew $MYVIMRC <bar> tcd %:h<cr>", "open init.lua")
 
 ------------------------------------------------------------
--- TODO:
+-- Always use very magic mode for searching
+keymap("n", "/", [[/\v]])
 
 -- https://vim.fandom.com/wiki/Keystroke_Saving_Substituting_and_Searching
 -- Searching and Substituting for an arbitrary visually selected part of text
 
-vim.cmd( [[
-" a) Searching:
-vmap / y:execute "/".escape(@",'[]/\.*')<CR>
+-- a) Searching for an arbitrary visually selected part of text
+-- vnoremap/ y:execute "/".escape(@",'[]/\.*')<CR>
+keymap('x', '/', [[y:execute "/".escape(@",'[]/\.*')<CR>]])
 
-" b) Substituting:
-vmap <C-H> y:execute "%s/".escape(@",'[]/')."//gc"<Left><Left><Left><Left>
-]] )
+-- b) Substituting an arbitrary visually selected part of text
+-- https://jdhao.github.io/2019/04/29/nvim_map_with_a_count/
+-- INFO:   '<lt>Left><lt>Left>'
 
+-- vnoremap <expr> <C-H> 'y:%s/' . escape(@",'[]/') . '//g<Left><Left>'
+keymapExpr('x', '<C-H>', [['y:%s/' . escape(@",'[]/') . '//g<lt>Left><lt>Left>']])
+
+-- nnoremap <expr> <C-H> ':%s/\<' . expand('<cword>') . '\>//g<Left><Left>'
+keymapExpr('n', '<C-H>', [[':%s/\<' . expand('<cword>') . '\>//g<lt>Left><lt>Left>']])
+
+--[[
+:echo(expand('<cword>'))
+The \< and \> ensure that only complete words are found (the search finds foo but not food).
+
+h escape()
+escape({string}, {chars})
+
+Escape the characters in {chars} that occur in {string} with a
+backslash.  Example:
+  :echo escape('c:\program files\vim', ' \')
+results in:
+  c:\\program\ files\\vim
+
+https://vim.fandom.com/wiki/Search_and_replace_the_word_under_the_cursor
+https://vim.fandom.com/wiki/Search_and_replace
+https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text
+]]
 ------------------------------
 -- https://github.com/VonHeikemen/dotfiles
-
--- vim.keymap.set('n', 'gs', ':%s/')
--- vim.keymap.set('x', 'gs', ':s/')
-
-vim.keymap.set('c', '<C-j>', 'wildmenumode() ? "<c-j>" : "<down>"', { expr = true, replace_keycodes = false })
-vim.keymap.set('c', '<C-k>', 'wildmenumode() ? "<c-k>" : "<up>"', { expr = true, replace_keycodes = false })
-
--- Add word to search then replace
-keymap('n', '<Leader>j', [[<cmd>let @/='\<'.expand('<cword>').'\>'<cr>"_ciw]])
-
--- Add selection to search then replace
-keymap('x', '<Leader>j', [[y<cmd>let @/=substitute(escape(@", '/'), '\n', '\\n', 'g')<cr>"_cgn]])
 
 -- Begin a "searchable" macro
 keymap('x', 'qi', [[y<cmd>let @/=substitute(escape(@", '/'), '\n', '\\n', 'g')<cr>gvqi]])
@@ -227,7 +249,6 @@ keymapRemap('n', 'đ', ']', [[ Remap: 'đ', ']' ]])
 
 ------------------------------
 -- https://github.com/jdhao/nvim-config
-
 -- Navigation in the location and quickfix list
 
 -- :lopen
@@ -247,6 +268,12 @@ keymap("n", "]Q", "<cmd>clast<cr>zv", "last qf item")
 ------------------------------------------------------------
 -- Window movement commands (mappings optional):
 -- <C-u>, <C-d>, <C-b>, <C-f>, <C-y>, <C-e>, zt, zz, zb.
+
+-- h CTRL-U
+-- Scroll window Upwards in the buffer. (default: half a screen).
+
+-- h CTRL-B ==> <PageUp>
+-- h CTRL-F ==> <PageDown>
 
 -- C-y, Scroll up, but cursor will not move
 -- C-e, Scroll down, but curson will not move
@@ -338,6 +365,7 @@ keymap('n', '<Leader>db', ':silent w <BAR> :silent %bd <BAR> e#<CR>')
 -- keymap("n", [[\d]], "<cmd>bprevious <bar> bdelete #<cr>", "delete buffer")
 
 ------------------------------
+-- C:\UTILS\Neovim\share\nvim\runtime\mswin.vim
 -- Use CTRL-Q to do what CTRL-V used to do
 -- noremap <C-Q>		<C-V>
 
@@ -361,19 +389,15 @@ Use these registers for storing and retrieving the selected text for the GUI.
 -- 1. The unnamed register ""
 keymap('n', 'Y', 'yg_', 'Copy line to unnamed register "" (start from cursor pos)')
 
--- Paste, command mode:  <C-R>"
-
-------------------------------------------------------------
--- https://github.com/kristijanhusak/neovim-config
+-- Paste, command (and insert) mode:  <CTRL-R>"
 
 ------------------------------
--- A) Copy to system clipboard:
-
 -- 8. Selection registers "* and "+
 -- (Copy to system clipboard.)
 
--- mswin.vim
+-- A) Copy to system clipboard:
 
+-- mswin.vim
 keymap('x', '<C-c>', '"+y', '  Copy selected text to clipboard - Selection registers "* and "+')
 
 keymap('n', '<C-y>', '"+yg_', '  Copy line (start from cursor position) to clipboard - Selection registers "* and "+')
@@ -382,8 +406,8 @@ keymap('n', '<C-y>', '"+yg_', '  Copy line (start from cursor position) to cl
 keymap('n', '<C-c>', '"+yiW', '  Copy WORD to clipboard - Selection registers "* and "+')
 keymap('n', '<C-p>', '"+yiw', '  Copy word to clipboard - Selection registers "* and "+')
 
--- CTRL-P
--- CTRL-N
+-- h CTRL-P
+-- h CTRL-N
 
 ------------------------------
 --[[
@@ -396,19 +420,15 @@ keymap({ 'n', 'x' }, 'x', '"_x')
 ------------------------------
 -- B) Paste from system clipboard with Ctrl + v
 
--- Paste, command mode:  <C-R>+
--- map <C-V>		"+gP
-
 -- vim.keymap.set({'n', 'v'}, '<C-v>', '"+p', {remap = true, desc = 'Paste from clipboard'})
 keymapRemap({ 'n', 'v' }, '<C-v>', '"+gP', 'Paste from clipboard = Insert from + register')
 
+-- Paste, command (and insert) mode:  <CTRL-R>+
 keymapRemap({ 'i', 'c' }, '<C-v>', '<C-R>+', 'Paste from clipboard = Insert from + register')
 
 ------------------------------------------------------------
 -- C:\UTILS\Neovim\share\nvim\runtime\mswin.vim
 -- Set options and add mapping such that Vim behaves a lot like MS-Windows
-
--- TODO:
 
 vim.cmd( [[
 
