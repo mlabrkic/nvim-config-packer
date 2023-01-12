@@ -215,6 +215,11 @@ keymapExpr('x', '<C-H>', [['y:%s/' . escape(@",'[]/') . '//g<lt>Left><lt>Left>']
 -- nnoremap <expr> <C-H> ':%s/\<' . expand('<cword>') . '\>//g<Left><Left>'
 keymapExpr('n', '<C-H>', [[':%s/\<' . expand('<cword>') . '\>//g<lt>Left><lt>Left>']])
 
+-- https://github.com/mfussenegger/dotfiles/blob/master/vim/.config/nvim/lua/me/init.lua
+-- h gn
+-- vim.keymap.set('x', 'gs', [["sy:let @/=@s<CR>cgn]])
+-- vim.keymap.set('n', 'gs', [[:let @/='\<'.expand('<cword>').'\>'<CR>cgn]])
+
 --[[
 :echo(expand('<cword>'))
 The \< and \> ensure that only complete words are found (the search finds foo but not food).
