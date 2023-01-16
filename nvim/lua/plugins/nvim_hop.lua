@@ -1,4 +1,3 @@
--- 'phaazon/hop.nvim',
 -- https://github.com/phaazon/hop.nvim
 
 -- ---------------------------------------------------------
