@@ -1,4 +1,7 @@
-  -- https://github.com/jdhao/nvim-config
+
+-- Vim Script
+
+-- https://github.com/jdhao/nvim-config
 
 local keymap = vim.keymap
 

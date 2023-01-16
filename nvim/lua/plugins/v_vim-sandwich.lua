@@ -1,22 +1,19 @@
--- https://github.com/machakann/vim-sandwich
+--[[
+https://github.com/machakann/vim-sandwich
+Vim Script
 
--- Plugin to manipulate character pairs quickly
-  -- use({'machakann/vim-sandwich', event = "VimEnter"}) -- saiw" , sr"( , sd(
-
-------------------------------
--- Add:      saiw(         makes foo   to  (foo)
--- sa{motion/textobject}{addition}
-
--- Delete:   sdb or sd(    makes (foo) to  foo
--- sdb or sd{deletion}
-
--- Replace:  srb" or sr("  makes (foo) to "foo"
--- srb{addition}  or  sr{deletion}{addition}
+Plugin to manipulate character pairs quickly
+saiw" , sr"( , sd(
 
 ------------------------------
--- Pioneers:
--- use 'tpope/vim-surround' -- ysiw" , cs"' , ds'
+Add:  saiw(               makes foo   to  (foo)
+Delete:  sdb or sd(
+Replace:  srb" or sr("    makes (foo) to "foo"
 
+Visual mode:
+sa"
+
+]]
 ------------------------------
 -- visual selection:
 -- Vsa"
@@ -41,13 +38,9 @@
 ------------------------------
 -- https://github.com/machakann/vim-sandwich/wiki/Magic-characters
 
--- Input	Name	Examples
--- f / F	Function surroundings	arg -> func(arg)
--- i / I	Instant surroundings	text -> [before]text[after]
--- t / T	HTML style tags	text -> <p>text</p>
-
 ------------------------------
 -- Map s to nop since s in used by vim-sandwich. Use cl instead of s.
+
 vim.cmd( [[
 nmap s <Nop>
 omap s <Nop>
