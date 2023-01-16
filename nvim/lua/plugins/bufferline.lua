@@ -1,3 +1,5 @@
+-- https://github.com/akinsho/bufferline.nvim
+
 -- See :help bufferline-settings
 require('bufferline').setup( {
   options = {
