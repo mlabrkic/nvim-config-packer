@@ -13,16 +13,6 @@ return function(use)
     end
   }
 
-  -- Modern matchit implementation
-  -- vim match-up: even better % 👊 navigate and highlight matching words 👊
-  use { "andymass/vim-matchup", event = "VimEnter",  -- https://github.com/jdhao/nvim-config
-    config = [[require('plugins.vim-matchup')]] }
-  -- Adds motions g%, [%, ]%, and z%.
-  -- Combines these motions into convenient text objects i% and a%.
-
-  use { "machakann/vim-sandwich", event = "VimEnter",  -- manipulate character pairs quickly, saiw" , sr"( , sd(
-    config = [[require('plugins.vim-sandwich')]] }
-
   use { "akinsho/bufferline.nvim", -- event = "VimEnter",
     -- cond = firenvim_not_active,
     config = [[require('plugins.bufferline')]] }
@@ -42,18 +32,55 @@ return function(use)
     requires = "nvim-lua/plenary.nvim",
     config = [[require('plugins.todocomments')]] }
 
-  -- use { "max397574/better-escape.nvim", event = { "InsertEnter" },
-  --   config = function()
-  --     require("better_escape").setup {
-  --       -- mapping = { "jk" },
-  --       mapping = { "jj" },
-  --       timeout = vim.o.timeoutlen,
-  --       keys = "<ESC>",
-  --     }
-  --   end,
+------------------------------------------------------------
+  -- Vim Script
+
+  -- https://github.com/rockerBOO/awesome-neovim#markdown-and-latex
+
+  -- vim match-up: even better % 👊 navigate and highlight matching words 👊
+  use { "andymass/vim-matchup", event = "VimEnter",
+    config = [[require('plugins.v_vim-matchup')]] }
+
+  -- manipulate character pairs quickly, saiw" , sr"( , sd(
+  use { "machakann/vim-sandwich", event = "VimEnter",
+    config = [[require('plugins.v_vim-sandwich')]] }
+
+------------------------------
+  -- https://github.com/jdhao/nvim-config
+
+  -- Another markdown plugin
+  use { "preservim/vim-markdown", ft = { "markdown" },
+    config = [[require('plugins.v_vim-markdown')]] }
+
+  -- Faster footnote generation
+  use { "vim-pandoc/vim-markdownfootnotes", ft = { "markdown" } }
+    -- config = [[require('plugins.v_vim-markdownfootnotes')]] }
+
+  -- Vim tabular plugin for manipulate tabular, required by markdown plugins
+  use { "godlygeek/tabular", cmd = { "Tabularize" } }
+    -- config = [[require('plugins.v_tabular')]] }
+
+  -- Please make sure that you have installed node.js .
+  use {
+    "iamcco/markdown-preview.nvim", ft = { "markdown" },
+    run = "cd app && npm install",
+    -- requires = { "zhaozg/vim-diagram", "aklt/plantuml-syntax" },
+    config = [[require('plugins.v_markdown-preview')]]
+  }
+
+------------------------------
+  -- https://github.com/Avimitin/nvim
+
+  -- use{ "mzlogin/vim-markdown-toc",
+  --   cmd = { "GenTocGFM", },
+  -- }
+  --
+  -- use{ "dhruvasagar/vim-table-mode",
+  --   cmd = "TableModeToggle",
   -- }
 
 ------------------------------------------------------------
+
   -- use({"wellle/targets.vim", event = "VimEnter"})
 
   -- Colorize color codes
@@ -72,31 +99,16 @@ return function(use)
 
   -- use 'rafcamlet/nvim-luapad'
 
-------------------------------------------------------------
-  -- https://github.com/jdhao/nvim-config
---[[
-  use { "preservim/vim-markdown", ft = { "markdown" } }    -- Another markdown plugin
-  use { "vim-pandoc/vim-markdownfootnotes", ft = { "markdown" } }
-
-  -- Vim tabular plugin for manipulate tabular, required by markdown plugins
-  use { "godlygeek/tabular", cmd = { "Tabularize" } }
-
-  use({ "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
-    -- setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
-    ft = { "markdown" },
-  })
-------------------------------
-  -- https://github.com/Avimitin/nvim
-
-  use{ "mzlogin/vim-markdown-toc",
-    cmd = { "GenTocGFM", },
-  }
-
-  use{ "dhruvasagar/vim-table-mode",
-    cmd = "TableModeToggle",
-  }
-]]
+  -- use { "max397574/better-escape.nvim", event = { "InsertEnter" },
+  --   config = function()
+  --     require("better_escape").setup {
+  --       -- mapping = { "jk" },
+  --       mapping = { "jj" },
+  --       timeout = vim.o.timeoutlen,
+  --       keys = "<ESC>",
+  --     }
+  --   end,
+  -- }
 
 ------------------------------------------------------------
 
