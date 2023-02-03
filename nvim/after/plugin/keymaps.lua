@@ -42,7 +42,11 @@ local keymapRemap = function( mode, key, result, desc )
   -- vim.keymap.set(mode, key, result, {remap = true, silent = true, desc = desc})
   vim.keymap.set( mode, key, result, { desc = desc, remap = true, } )
 end
-
+--[[
+mode - the editor mode for the mapping (e.g., i for "insert" mode).
+key -  (lhs) the keybinding to detect
+result -  (rhs) the command to execute
+]]
 ------------------------------------------------------------
 -- https://github.com/jdhao/nvim-config
 
@@ -203,14 +207,16 @@ keymap("n", "/", [[/\v]])
 
 -- a) Searching for an arbitrary visually selected part of text
 -- vnoremap/ y:execute "/".escape(@",'[]/\.*')<CR>
-keymap('x', '/', [[y:execute "/".escape(@",'[]/\.*')<CR>]])
+-- keymap('x', '/', [[y:execute "/".escape(@",'[]/\.*')<CR>]])
+keymap('x', '/', [[y:execute "/".escape(@","\\/.*'$^~[]")<CR>]])
 
 -- b) Substituting an arbitrary visually selected part of text
 -- https://jdhao.github.io/2019/04/29/nvim_map_with_a_count/
 -- INFO:   '<lt>Left><lt>Left>'
 
 -- vnoremap <expr> <C-H> 'y:%s/' . escape(@",'[]/') . '//g<Left><Left>'
-keymapExpr('x', '<C-H>', [['y:%s/' . escape(@",'[]/') . '//g<lt>Left><lt>Left>']])
+-- keymapExpr('x', '<C-H>', [['y:%s/' . escape(@",'[]/') . '//g<lt>Left><lt>Left>']])
+keymapExpr('x', '<C-H>', [['y:%s/' . escape(@", "\\/.*'$^~[]") . '//g<lt>Left><lt>Left>']]) -- date: 2023-01M-25 09:25:31
 
 -- nnoremap <expr> <C-H> ':%s/\<' . expand('<cword>') . '\>//g<Left><Left>'
 keymapExpr('n', '<C-H>', [[':%s/\<' . expand('<cword>') . '\>//g<lt>Left><lt>Left>']])
