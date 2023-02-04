@@ -5,7 +5,6 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   is_bootstrap = true
   vim.fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
   vim.cmd [[packadd packer.nvim]]
-  vim.api.nvim_echo({ { "packer.nvim is installed", "Type" } }, true, {}) -- jdhao -- mlabrkic
 end
 
 require('packer').startup(function(use)
@@ -30,7 +29,7 @@ require('packer').startup(function(use)
   use { -- Autocompletion
     'hrsh7th/nvim-cmp',
     requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip',
-      'hrsh7th/cmp-buffer',    -- mlabrkic
+      'hrsh7th/cmp-buffer',            -- mlabrkic
     },
   }
 
@@ -48,7 +47,7 @@ require('packer').startup(function(use)
 
   -- Git related plugins
   use 'tpope/vim-fugitive'
-  use 'tpope/vim-rhubarb'  -- rhubarb.vim: GitHub extension for fugitive.vim (:GBrowse)
+  use 'tpope/vim-rhubarb'  -- GitHub extension for fugitive.vim (:GBrowse) -- mlabrkic
   use 'lewis6991/gitsigns.nvim'
 
   use 'navarasu/onedark.nvim' -- Theme inspired by Atom
@@ -58,12 +57,14 @@ require('packer').startup(function(use)
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
 
   -- Fuzzy Finder (files, lsp, etc)
-  use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' }, }
+  use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', }
+  -- First install other plugins. After that uncomment this:
+  -- use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', }  -- mlabrkic
 
-  -- Add plugins of your choice, to packer, from nvim/lua/plugins.lua
+  -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
+  -- local has_plugins, plugins = pcall(require, 'custom.plugins')
   local has_plugins, plugins = pcall(require, 'plugins')
   if has_plugins then
     plugins(use)
@@ -346,7 +347,7 @@ end
 --
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
-local servers = {  -- mlabrkic
+local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
@@ -369,13 +370,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Setup mason so it can manage external tooling
-require('mason').setup({
-  -- ui = {border = 'rounded'},
-
-	-- The directory in which to install packages.
-	-- install_root_dir = path.concat { vim.fn.stdpath "data", "mason" },
-	install_root_dir = "C:/UTILS/PORT/Neovim_LSP",  -- mlabrkic
-})
+require('mason').setup()
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require 'mason-lspconfig'
