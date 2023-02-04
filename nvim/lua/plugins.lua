@@ -7,6 +7,23 @@ return function(use)
 -- 	end
 -- })
 
+-- https://www.chiarulli.me/Neovim-2/03-plugins/
+-- Autocommand that reloads neovim whenever you save the plugins.lua file
+-- vim.cmd([[
+--   augroup packer_user_config
+--     autocmd!
+--     autocmd BufWritePost plugins.lua source <afile> | PackerSync
+--   augroup end
+-- ]])
+
+  -- Automatically source and re-compile packer whenever you save this init.lua
+  -- local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
+  -- vim.api.nvim_create_autocmd('BufWritePost', {
+  --   pattern = 'plugins.lua',
+  --   command = 'source <afile> | PackerCompile',
+  --   group = packer_group,
+  -- })
+
   use { 'windwp/nvim-autopairs', event = "InsertEnter",   -- autopair, Lua
     config = function()
       require('nvim-autopairs').setup()
@@ -51,7 +68,7 @@ return function(use)
 
 ------------------------------------------------------------
   -- https://github.com/rockerBOO/awesome-neovim#markdown-and-latex
-  -- INFO: Markdown
+  -- MARKDOWN
 
   -- https://github.com/jdhao/nvim-config
 
@@ -68,12 +85,14 @@ return function(use)
     -- config = [[require('plugins.v_tabular')]] }
 
   -- Please make sure that you have installed node.js .
-  use {
-    "iamcco/markdown-preview.nvim", ft = { "markdown" },
-    run = "cd app && npm install",
-    -- requires = { "zhaozg/vim-diagram", "aklt/plantuml-syntax" },
-    config = [[require('plugins.v_markdown-preview')]],
-  }
+  -- INFO: First install other plugins. After that uncomment this:
+
+  -- use {
+  --   "iamcco/markdown-preview.nvim", ft = { "markdown" },
+  --   run = "cd app && npm install",
+  --   -- requires = { "zhaozg/vim-diagram", "aklt/plantuml-syntax" },
+  --   config = [[require('plugins.v_markdown-preview')]],
+  -- }
 
 ------------------------------
   -- https://github.com/Avimitin/nvim
