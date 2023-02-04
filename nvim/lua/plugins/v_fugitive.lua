@@ -1,7 +1,9 @@
-
 -- Vim Script
+-- use 'tpope/vim-fugitive'
+-- Git command inside vim
 
 -- https://github.com/jdhao/nvim-config
+-- use { "tpope/vim-fugitive", event = "User InGitRepo", config = [[require('plugins.fugitive')]] }
 
 local keymap = vim.keymap
 
