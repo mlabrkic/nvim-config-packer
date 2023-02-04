@@ -203,8 +203,8 @@ command! -bang -range QToggleSlash <line1>,<line2>call ToggleSlash(<bang>1)
 
 " noremap <silent> <F8> :QToggleSlash<CR>
 
-" Enter :ToggleSlash! to force changes to each selected line to be the same: 
-" if the first slash found is a forward slash, all slashes in all selected lines are changed to backslashes; 
+" Enter :ToggleSlash! to force changes to each selected line to be the same:
+" if the first slash found is a forward slash, all slashes in all selected lines are changed to backslashes;
 " otherwise, all slashes in all selected lines are changed to forward slashes.
 
 " ------------------------------------------------------------
@@ -288,6 +288,31 @@ function! CopyMatches(reg)
 endfunction
 command! -register QCopyMatches call CopyMatches(<q-reg>)
 
+" ----------------------------------------------------------
+" MyCommand 14:
+" https://github.com/jdhao/nvim-config
+" nvim-config\autoload\utils.vim
+
+" https://github.com/wbthomason/packer.nvim/discussions/534
+
+augroup git_repo_check
+  autocmd!
+  autocmd VimEnter,DirChanged * call Inside_git_repo()
+augroup END
+
+" Check if we are inside a Git repo.
+" function! utils#Inside_git_repo() abort
+function! Inside_git_repo() abort
+  let res = system('git rev-parse --is-inside-work-tree')
+  if match(res, 'true') == -1
+    return v:false
+  else
+    " Trigger a special user autocmd InGitRepo (to use it for
+    " lazyloading of fugitive by packer.nvim).
+    doautocmd User InGitRepo
+    return v:true
+  endif
+endfunction
 
 
 
