@@ -9,7 +9,7 @@ A starting point for my configuration is [kickstart.nvim](https://github.com/nvi
 
 
 ### Install and setup
-See [doc here](docs/INSTALL.md) on how to install Neovim and Neovim dependencies.
+See [doc here](nvim/doc/INSTALL.md) on how to install Neovim and Neovim dependencies.
 
 
 ### Features #
