@@ -1,5 +1,4 @@
-#### Introduction
-
+### Introduction
 This is my Neovim configuration for Windows.  
 `init.lua` is the config entry point for terminal Nvim,
 and `ginit.vim` is the additional config file for [GUI client of Nvim](https://github.com/neovim/neovim/wiki/Related-projects#gui).  
@@ -9,13 +8,11 @@ This config is only maintained for [the latest nvim stable release](https://gith
 A starting point for my configuration is [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim).
 
 
-#### Install and setup
+### Install and setup
+See [doc here](docs/INSTALL.md) on how to install Neovim and Neovim dependencies.
 
-See [doc here](INSTALL.md) on how to install Neovim and Neovim dependencies.
 
-
-#### Features #
-
+### Features #
 + Plugin management via [Packer.nvim](https://github.com/wbthomason/packer.nvim).
 + Code, snippet, word auto-completion via [nvim-cmp](https://github.com/hrsh7th/nvim-cmp).
 + Language server protocol (LSP) support via [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig).
@@ -30,7 +27,7 @@ See [doc here](INSTALL.md) on how to install Neovim and Neovim dependencies.
 + ......
 
 
-#### References
+### References
 https://github.com/jdhao/nvim-config
 
 
