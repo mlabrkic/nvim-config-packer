@@ -67,5 +67,6 @@ Install MSVC toolchain: [Visual Studio Build Tools](https://visualstudio.microso
 
 ### References
 https://github.com/jdhao/nvim-config#install-and-setup
-(Look also: Python, Pynvim)
+Look also: Python, Pynvim  
+(A lot of Nvim plugins are mainly written in Python, so we must install Python 3.)
 
