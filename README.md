@@ -51,19 +51,18 @@ See [doc here](nvim/doc/INSTALL.md) on how to install Neovim and Neovim dependen
 
 Check where the config folder is:
 ```
-:echo stdpath("config")  
+:echo stdpath("config")
 ==>  C:\Users\userName\AppData\Local\nvim
 
-:echo stdpath("data")  
+:echo stdpath("data")
 ==>  C:\Users\userName\AppData\Local\nvim-data
 
-Windows command shell:  
-echo %userprofile%  
+Windows command shell:
+echo %userprofile%
 ==>  C:\Users\userName
 
 echo %localappdata%
 ==>  C:\Users\userName\AppData\Local
-
 ```
 
 #### Neovim config and plugins installation
@@ -99,7 +98,9 @@ Quit Neovim -  `:q(uit)` (press Enter)
 Or install manualy:  
 `:TSInstall java`  
 `:TSInstallInfo`  
-[Windows-support#troubleshooting](https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support#troubleshooting)
+[Windows-support#troubleshooting](https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support#troubleshooting)  
+
+Quit Neovim -  `:q(uit)` (press Enter)
 
 
 #### LSP check
@@ -109,8 +110,8 @@ Open a source file of one of the supported languages with Neovim, and run comman
 #### Keymaps check
 
 ```
-:echo mapcheck('<F4>', 'n')  
-:echo hasmapto('set relativenumber!<CR>', 'n')  
+:echo mapcheck('<F4>', 'n')
+:echo hasmapto('set relativenumber!<CR>', 'n')
 ```
 
 #### Configuration check
@@ -119,9 +120,98 @@ Open nvim and run command "checkhealth", you should not see any error in the out
 
 
 ---
-### INSTALLATION of some PLUGINS
+### PLUGINS with POST-INSTALL/update HOOKS
+
+Plugins can have post-install/update hooks ([Packer.nvim](https://github.com/wbthomason/packer.nvim).)  
+It is best to install them one by one!
+
+Info:  
+-- Regenerate compiled loader file  :PackerCompile  
+-- Clean, then install missing plugins  :PackerInstall  
+-- Show list of installed plugins  :PackerStatus  
+-- Loads opt plugin immediately :PackerLoad trouble.nvim
+
+h packer.compile()
 
 
+#### [telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim)  
+
+```
+init.lua :
+
+  -- INFO: First install other plugins. After that uncomment this:
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', }  -- mlabrkic
+```
+To get fzf-native working, you need to build it with either cmake or make:  
+A) CMake, and the Microsoft C++ Build Tools, or  
+B) Make, and MinGW (gcc or clang)(my choice)
+
+Check this after installation:  
+```
+Windows Command shell:
+cd %LOCALAPPDATA%\nvim-data\site\pack\packer\start\telescope-fzf-native.nvim\
+cd build
+dir
+==> libfzf.dll exist?
+```
+
+
+If libfzf.dll does not exist ...
+
+
+A)
+Check for "make" (in Neovim):  
+:echo executable("make")  
+or  
+:lua print(vim.fn.executable('make'))
+
+```
+Windows Command shell:
+make -v
+make -h
+```
+
+
+B)
+If you have "make":
+```
+Windows Command shell:
+cd %LOCALAPPDATA%\nvim-data\site\pack\packer\start\telescope-fzf-native.nvim\
+dir
+
+make
+```
+
+
+C)
+If you don't have a "make":
+```
+Windows Command shell:
+cd %LOCALAPPDATA%\nvim-data\site\pack\packer\start\telescope-fzf-native.nvim\
+
+mkdir build
+gcc -O3 -Wall -Werror -fpic -std=gnu99 -shared src/fzf.c -o build/libfzf.dll
+
+-->
+telescope-fzf-native.nvim\build\libfzf.dll
+```
+
+
+#### "iamcco/markdown-preview.nvim"
+
+```
+nvim\lua\plugins.lua :
+
+  -- Please make sure that you have installed node.js .
+  -- INFO: First install other plugins. After that uncomment this:
+
+  use {
+    "iamcco/markdown-preview.nvim", ft = { "markdown" },
+    run = "cd app && npm install",
+    -- requires = { "zhaozg/vim-diagram", "aklt/plantuml-syntax" },
+    config = [[require('plugins.v_markdown-preview')]],
+  }
+```
 
 
 
