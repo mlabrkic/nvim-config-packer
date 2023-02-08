@@ -77,43 +77,45 @@ Windows command shell:  `help XCOPY`
 and (if you want)  
 `XCOPY %LOCALAPPDATA%\nvim-data\* nvim-data\ /S /H`
 
-* Delete "nvim", "nvim-data" and "packer_compiled.lua":  
+* Delete folders "nvim" and "nvim-data":  
+( Delete file "packer_compiled.lua":  `DEL %LOCALAPPDATA%\nvim\plugin\packer_compiled.lua` )  
 Delete folder "nvim":  `RD %LOCALAPPDATA%\nvim\`  
 Delete folder "nvim-data":  `RD %LOCALAPPDATA%\nvim-data\`  
-Delete file "packer_compiled.lua":  `DEL %LOCALAPPDATA%\nvim\plugin\packer_compiled.lua`
 
-* Copy and paste this repo `nvim` folder into `%LOCALAPPDATA%`  
+* Copy the "nvim" folder of this repo into `%LOCALAPPDATA%`  
 `XCOPY nvim\* %LOCALAPPDATA%\ /S /H`  
 
-* Start (1.) Neovim (`nvim`)  
+* Start (1.) Neovim (nvim)  
 Ignore any error message about missing plugins!  
-Wait for:   "packer.nvim - finished in" 463s (7,7 min)  
-Quit Neovim -  :q(uit) (press Enter)
+==> Wait for:   "packer.nvim - finished in" 463s (7,7 min)  
+Quit Neovim -  `:q(uit)` (press Enter)
 
-* Start (2.) Neovim (`nvim`)  
+* Start (2.) Neovim (nvim)  
 "  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim' },"  
-==>
-Wait for nvim-treesitter parsers to compile ( 1/9, 2/9, ... , 9/9).  
+==> Wait for nvim-treesitter parsers to compile ( 1/9, 2/9, ... , 9/9).  
 ...  
 [4/9] Treesitter parser fo lua has been installed.  
 ...  
-Or install manualy  
-:TSInstall python  
-:TSInstallInfo  
+Or install manualy:  
+`:TSInstall java`  
+`:TSInstallInfo`  
 [Windows-support#troubleshooting](https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support#troubleshooting)
 
 
 #### LSP check
-Open a source file of one of the supported languages with Neovim, and run command `:LspInfo` for testing the LSP support.  
-:LspInfo
+Open a source file of one of the supported languages with Neovim, and run command "LspInfo" for testing the LSP support.  
+`:LspInfo`
 
 #### Keymaps check
-:echo mapcheck('\<F4\>', 'n')  
+
+```
+:echo mapcheck('<F4>', 'n')  
 :echo hasmapto('set relativenumber!<CR>', 'n')  
+```
 
 #### Configuration check
-Open nvim and run command `checkhealth`, you should not see any error in the output (except for the one related to the Python 2 interpreter if don't have it):  
-:checkhealth
+Open nvim and run command "checkhealth", you should not see any error in the output (except for the one related to the Python 2 interpreter if don't have it):  
+`:checkhealth`
 
 
 ---
