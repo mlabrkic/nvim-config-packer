@@ -1,4 +1,4 @@
-### [Install Neovim (Windows)](https://github.com/neovim/neovim/wiki/Installing-Neovim)
+### [INSTALL NEOVIM (Windows)](https://github.com/neovim/neovim/wiki/Installing-Neovim)
 
 [Windows, Neovim pre-built archives](https://github.com/neovim/neovim/wiki/Installing-Neovim#pre-built-archives)
 
@@ -24,7 +24,7 @@ Install:
 
 
 
-### Install dependencies
+### INSTALL DEPENDENCIES
 
 ##### 1. Git
 First check if `git` is already installed:  git --version  
