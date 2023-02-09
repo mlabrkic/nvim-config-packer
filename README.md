@@ -143,7 +143,7 @@ Open nvim and run command "checkhealth", you should not see any error in the out
 ### PLUGINS with POST-INSTALL/update HOOKS
 
 Plugins can have post-install/update hooks ([Packer.nvim](https://github.com/wbthomason/packer.nvim).)  
-It is best to install them one by one!
+It is best to install them **one by one**!
 
 Info:  
 -- Regenerate compiled loader file  :PackerCompile  
@@ -164,8 +164,8 @@ init.lua :
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', }  -- mlabrkic
 ```
 To get fzf-native working, you need to build it with either cmake or make:  
-A) CMake, and the Microsoft C++ Build Tools, or  
-B) Make, and MinGW (gcc or clang)(my choice)  
+* CMake, and the Microsoft C++ Build Tools, or  
+* Make, and MinGW (gcc or clang)(my choice)  
 ( See [doc here](nvim/doc/INSTALL.md#6-c-compiler) on how to install C compiler. )
 
 Check this after installation:  
@@ -214,7 +214,19 @@ gcc -O3 -Wall -Werror -fpic -std=gnu99 -shared src/fzf.c -o build/libfzf.dll
 
 -->
 telescope-fzf-native.nvim\build\libfzf.dll
+
 ```
+
+NOTE:
+If you want to uninstall this plugin later ...  
+
+* First delete the "build" folder:  
+cd %LOCALAPPDATA%\nvim-data\site\pack\packer\start\telescope-fzf-native.nvim\  
+RD build\
+
+* Comment plugin in "init.lua"
+* Run  :PackerInstall
+
 
 </details>
 
@@ -237,6 +249,23 @@ nvim\lua\plugins.lua :
   }
 ```
 
+* Open some markdown file.
+* :MarkdownPreview ( `nnoremap <A-m> :<C-U>MarkdownPreview<CR>` )
+* Wait cca 15 s.
+
+<details>
+<summary>If nothing happened after "MarkdownPreview" command ...</summary>
+
+.  
+Nothing happened after "MarkdownPreview" command. No page opened in browser.  
+Check for errors `:messages`  
+...  
+Please make sure that you have installed node.js ( `node --version` ).  
+If there are errors, then uninstall the plugin, and repeat everything.
+
+</details>
+
+\--------------
 
 ---
 
