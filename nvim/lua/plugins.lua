@@ -50,10 +50,13 @@ return function(use)
     requires = "kyazdani42/nvim-web-devicons",
     config = [[require('plugins.trouble')]], }
 
-  use { "folke/todo-comments.nvim",
-    -- cmd = { "TodoQuickfix", "TodoTrouble", "TodoTelescope" },
-    requires = "nvim-lua/plenary.nvim",
-    config = [[require('plugins.todocomments')]], }
+  -- INFO: First install other plugins. After that uncomment this
+  -- Uncomment No_ 02:
+
+  -- use { "folke/todo-comments.nvim",
+  --   -- cmd = { "TodoQuickfix", "TodoTrouble", "TodoTelescope" },
+  --   requires = "nvim-lua/plenary.nvim",
+  --   config = [[require('plugins.todocomments')]], }
 
 ------------------------------------------------------------
   -- Vim Script
@@ -85,7 +88,8 @@ return function(use)
     -- config = [[require('plugins.v_tabular')]] }
 
   -- Please make sure that you have installed node.js .
-  -- INFO: First install other plugins. After that uncomment this:
+  -- INFO: First install other plugins. After that uncomment this
+  -- Uncomment No_ 03:
 
   -- use {
   --   "iamcco/markdown-preview.nvim", ft = { "markdown" },
