@@ -60,7 +60,9 @@ require('packer').startup(function(use)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
-  -- INFO: First install other plugins. After that uncomment this:
+  -- INFO: First install other plugins. After that uncomment this
+  -- Uncomment No_ 01:
+
   -- use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', }  -- mlabrkic
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua

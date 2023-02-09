@@ -165,7 +165,7 @@ init.lua :
 ```
 To get fzf-native working, you need to build it with either cmake or make:  
 * CMake, and the Microsoft C++ Build Tools, or  
-* Make, and MinGW (gcc or clang)(my choice)  
+* Make, and MinGW (gcc)(my choice)  
 ( See [doc here](nvim/doc/INSTALL.md#6-c-compiler) on how to install C compiler. )
 
 Check this after installation:  
