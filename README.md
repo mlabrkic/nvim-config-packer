@@ -137,10 +137,26 @@ Open nvim and run command "checkhealth", you should not see any error in the out
 
 </details>
 
-
 ---
 
-### PLUGINS with POST-INSTALL/update HOOKS
+### FINALLY, install these plugins **ONE BY ONE**
+
+```
+  -- Uncomment No_ 01:
+  -- use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', }  -- mlabrkic
+
+  -- Uncomment No_ 02:
+  -- use { "folke/todo-comments.nvim",
+  --   requires = "nvim-lua/plenary.nvim",
+  --   config = [[require('plugins.todocomments')]], }
+
+  -- Uncomment No_ 03:
+  -- use {
+  --   "iamcco/markdown-preview.nvim", ft = { "markdown" },
+  --   run = "cd app && npm install",
+  --   config = [[require('plugins.v_markdown-preview')]],
+  -- }
+```
 
 Plugins can have post-install/update hooks ([Packer.nvim](https://github.com/wbthomason/packer.nvim).)  
 It is best to install them **one by one**!
