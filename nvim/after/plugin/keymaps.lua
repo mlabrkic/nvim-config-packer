@@ -72,6 +72,14 @@ keymap({ "n", "x" }, "L", "g_")
 
 -- gm  Like "g0", but half a screenwidth to the right (or as much as possible).
 
+------------------------------
+-- https://github.com/alpha2phi/modern-neovim/tree/01-init.lua
+-- Better viewing
+keymap("n", "n", "nzzzv")
+keymap("n", "N", "Nzzzv")
+keymap("n", "g,", "g,zvzz")
+keymap("n", "g;", "g;zvzz")
+
 ------------------------------------------------------------
 -- "Descs" are copied from:
 -- https://github.com/NvChad/NvChad
