@@ -29,8 +29,11 @@ nvim
 ├── doc\INSTALL.md
 │
 ├── lua
-│   ├── plugins\bufferline.lua, todocomments.lua, ...
-│   └── plugins.lua
+│   ├── custom
+│   │  ├── config\bufferline.lua, todocomments.lua, ...
+│   │  └── plugins.lua
+│   │
+│   └── 
 │
 ├── plugin\packer_compiled.lua
 │
