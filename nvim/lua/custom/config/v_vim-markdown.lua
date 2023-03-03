@@ -48,3 +48,10 @@ let g:vim_markdown_no_extensions_in_markdown = 1
 
 ]] )
 
+-- vim.keymap.set('n', 'š', '<Plug>Markdown_MoveToPreviousHeader')
+vim.keymap.set('n', 'šš', '<Plug>Markdown_MoveToPreviousHeader')
+
+-- vim.keymap.set('n', 'đ', '<Plug>Markdown_MoveToNextHeader')
+vim.keymap.set('n', 'đđ', '<Plug>Markdown_MoveToNextHeader')
+
+
