@@ -63,11 +63,10 @@ require('packer').startup(function(use)
   -- INFO: First install other plugins. After that uncomment this
   -- Uncomment No_ 01:
 
-  -- use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', }  -- mlabrkic
+  -- use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
-  -- local has_plugins, plugins = pcall(require, 'custom.plugins')
-  local has_plugins, plugins = pcall(require, 'plugins')
+  local has_plugins, plugins = pcall(require, 'custom/plugins')
   if has_plugins then
     plugins(use)
   end
@@ -349,6 +348,14 @@ end
 --
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
+
+-- Only as info:            -- mlabrkic
+-- https://github.com/williamboman/mason.nvim/blob/main/PACKAGES.md#lua-language-server
+-- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
+-- (lua_ls,  lua-language-server)
+
+-- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
+-- Note: this plugin uses the lspconfig server names in the APIs it exposes - not mason.nvim package names.
 local servers = {
   -- clangd = {},
   -- gopls = {},
@@ -356,7 +363,9 @@ local servers = {
   -- rust_analyzer = {},
   -- tsserver = {},
 
-  sumneko_lua = {
+  -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+  -- sumneko_lua = {  -- mlabrkic
+  lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
