@@ -41,17 +41,47 @@ let g:vim_markdown_fenced_languages = ['c++=cpp', 'viml=vim', 'bash=sh', 'ini=do
 
 " https://github.com/preservim/vim-markdown#do-not-require-md-extensions-for-markdown-links
 " This is super useful for GitLab and GitHub wiki repositories.
-let g:vim_markdown_no_extensions_in_markdown = 1
+" let g:vim_markdown_no_extensions_in_markdown = 1
 
-" gx: open the link under the cursor in the same browser as the standard gx command.
+" This is fine:
+" See [doc here](nvim/doc/INSTALL.md) on how to install Neovim and Neovim dependencies.
+" ==>
 " ge: open the link under the cursor in Vim for editing. Useful for relative markdown links.
 
 ]] )
 
--- vim.keymap.set('n', 'š', '<Plug>Markdown_MoveToPreviousHeader')
-vim.keymap.set('n', 'šš', '<Plug>Markdown_MoveToPreviousHeader')
+--[[
+https://github.com/preservim/vim-markdown#mappings
 
--- vim.keymap.set('n', 'đ', '<Plug>Markdown_MoveToNextHeader')
+The following work on normal and visual modes:
+gx: open the link under the cursor in the same browser as the standard gx command.
+
+ge: open the link under the cursor in Vim for editing. Useful for relative markdown links.
+Falls back to gf with force editing, if not on a markdown link.
+<Plug>Markdown_EditUrlUnderCursor
+
+The rules for the cursor position are the same as the gx command.
+]]
+
+-- ]]: go to next header. <Plug>Markdown_MoveToNextHeader
+-- [[: go to previous header. Contrast with ]h. <Plug>Markdown_MoveToPreviousHeader
+
+-- ][: go to next sibling header if any. <Plug>Markdown_MoveToNextSiblingHeader
+-- []: go to previous sibling header if any. <Plug>Markdown_MoveToPreviousSiblingHeader
+
+-- ]h: go to Current header. <Plug>Markdown_MoveToCurHeader
+-- ]u: go to parent header (Up). <Plug>Markdown_MoveToParentHeader
+
+------------------------------
+-- keymaps.lua :
+
+-- keyboard with Croatian characters
+-- :verbose nmap š
+-- keymapRemap('n', 'š', '[', [[ Remap: 'š', '[' ]])
+-- keymapRemap('n', 'đ', ']', [[ Remap: 'đ', ']' ]])
+
+------------------------------
+vim.keymap.set('n', 'šš', '<Plug>Markdown_MoveToPreviousHeader')
 vim.keymap.set('n', 'đđ', '<Plug>Markdown_MoveToNextHeader')
 
 
