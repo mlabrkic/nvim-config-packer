@@ -1,7 +1,8 @@
 
 ### INTRODUCTION
 
-This is my [Neovim](https://neovim.io) configuration for Windows (See: [Neovim Github repo](https://github.com/neovim/neovim)). <br>
+This is my old [Neovim](https://neovim.io) configuration for Windows (See: [Neovim Github repo](https://github.com/neovim/neovim)). <br>
+Here I used the [Packer.nvim](https://github.com/wbthomason/packer.nvim), plugin manager for Neovim. <br>
 Info:  [neovim/projects](https://github.com/neovim/neovim/projects?type=classic)  ==>  @bfredl, @tjdevries, @mfussenegger, @folke, ...
 
 
